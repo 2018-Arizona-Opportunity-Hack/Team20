@@ -1,7 +1,10 @@
 package com.team20.team20;
 
+import com.team20.team20.nexmo.InboundSms;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -14,10 +17,10 @@ public class SmsResponseController {
         return "hello, world";
     }
 
-    @GetMapping("/api/sms/inbound")
+    @PostMapping("/api/sms/inbound")
     @ResponseBody
-    public String inbound() {
-        System.out.println("got an inbound");
+    public String inbound(@RequestBody InboundSms inboundSms) {
+        System.out.println(inboundSms);
         return "hello, world";
     }
 
