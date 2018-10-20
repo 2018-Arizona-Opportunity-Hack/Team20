@@ -9,6 +9,7 @@ public class SmsResponseController {
     @GetMapping("/hello")
     @ResponseBody
     public String hello() {
+        System.out.println("got a hit");
         return "hello, world";
     }
 }
