@@ -3,19 +3,24 @@ import { connect } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 
-import { Progress } from 'reactstrap';
+import { fetchEvent } from '../redux/actions/eventActions';
+
+import {
+  Button,
+  Typography
+} from "smooth-ui";
 import ReactTable from 'react-table';
 import "react-table/react-table.css";
 import moment from 'moment';
 
 import SignupModal from './SignupModal';
-import AdminView from './AdminView';
+
 
 class Dashboard extends Component {
 
   render() {
     const { events } = this.props;
-    const renderStatus = (volunteers, volunteers_required) => {
+    const renderStatus = (volunteers, volunteers_required, event_ID) => {
       let alertStatus;
       let percentageFilled = (volunteers / volunteers_required * 100);
       if(percentageFilled === 100){
@@ -27,7 +32,7 @@ class Dashboard extends Component {
       }
         return (
           
-          <div style={{display: 'flex', justifyContent: "space-between"}}>
+          <div style={{display: 'flex', justifyContent: "space-between", alignItems: "center"}}>
             <span style ={{
               color: alertStatus ,
               transition: 'all .3s ease',
@@ -35,26 +40,31 @@ class Dashboard extends Component {
             &#x25cf;&nbsp;&nbsp;
                <span style={{ color: 'black' }}>{volunteers_required} volunteers needed</span>
             </span>
-            {/* <Link to={`/admin`}></Link> */}
-            <SignupModal />
+            <span style={{display: "flex"}}>
+
+              <Link to={`/dashboard/admin/event/${event_ID}`}>
+                Admin
+              </Link>
+              <SignupModal event_ID={event_ID}/>
+            </span>
           </div>
         ) 
     }
-    // console.log(moment())
-    // console.log(events)
     const columns = [
-      {
-        Header: 'Name',
+      { 
+        style: { display: 'flex', alignItems: 'center' },
+        Header: <h3>Name</h3>,
         accessor: 'name' // String-based value accessors!
       },
       {
-        Header: 'Time',
+        style: { display: 'flex', alignItems: 'center' },        
+        Header: <h3>Time</h3>,
         accessor: 'time' // String-based value accessors!
       },
       {
-        Header: 'Status',
-        accessor: 'events', // String-based value accessors!
-        Cell: (props) => renderStatus(props.original.volunteers, props.original.volunteers_required)
+        Header: <h3>Status</h3>,
+        accessor: 'events', // String-based value accessors! 
+        Cell: (props) => renderStatus(props.original.volunteers, props.original.volunteers_required, props.original.id)
       },
     ]
     if (events.length) {
@@ -80,7 +90,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-
+  fetchEvent
 }
 
 

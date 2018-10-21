@@ -23,8 +23,9 @@ class SignupModal extends Component {
 
   toggle = () => {
     if (localStorage.getItem('name') && localStorage.getItem('phone')) {
+      // remember to inclue event_ID
       console.log('already signed', localStorage.getItem('name'), localStorage.getItem('phone'))
-    }else{
+    } else {
       this.setState({
         modal: !this.state.modal
       });
@@ -54,7 +55,8 @@ class SignupModal extends Component {
         alert('Invalid phone number')
       } else if (!this.isName(values.name)) {
         alert('Invalid name')
-      }else{
+      } else {
+        localStorage.setItem('event_ID', this.props.event_ID);
         localStorage.setItem('name', values.name);
         localStorage.setItem('phone', values.phone);
         console.log(values)
@@ -84,7 +86,7 @@ class SignupModal extends Component {
     if (events.length) {
       return (
         <div>
-          <Button style={{backgroundColor: "green"}} onClick={this.toggle}>Volunteer!</Button>
+          <Button style={{ backgroundColor: "green" }} onClick={this.toggle}>Volunteer!</Button>
           <Modal isOpen={this.state.modal} toggle={this.toggle} >
             <ModalHeader toggle={this.toggle}>Volunteer Form</ModalHeader>
             <ModalBody >
@@ -121,8 +123,7 @@ class SignupModal extends Component {
                         variant="primary"
                       >
                         Submit
-          </Button>
-
+                     </Button>
                     </Box>
                   </form>
                 )}

@@ -1,5 +1,6 @@
 import {
-  FETCH_EVENTS
+  FETCH_EVENTS,
+  FETCH_EVENT
 } from './types';
 
 import axios from 'axios';
@@ -90,3 +91,10 @@ export const fetchEvents = () => dispatch => {
 //     })
 //   })
 // }
+
+export const fetchEvent = (event_ID) => dispatch => {
+  dispatch({
+    type: FETCH_EVENT,
+    payload: event_ID
+  })
+}

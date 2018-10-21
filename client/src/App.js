@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Dashboard from './components/Dashboard';
+import AdminView from './components/AdminView';
 
 import { fetchEvents } from './redux/actions/eventActions';
 
@@ -18,7 +19,8 @@ class App extends Component {
     return (
       <div className="App">
         <Switch>
-          <Route path ="/dashboard" component={Dashboard} />
+          <Route exact path ="/dashboard" component={Dashboard} />
+          <Route exact path ="/dashboard/admin/event/:event_id" component={AdminView} />
         </Switch>
       </div>
     );

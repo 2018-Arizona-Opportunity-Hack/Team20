@@ -9,7 +9,9 @@ import moment from 'moment';
 class AdminView extends Component {
 
   render() {
+    const { event_id } = this.props.match.params;
     const { events } = this.props;
+    console.log(event_id)
     // const renderStatus = (volunteers, volunteers_required) => {
     //   let alertStatus;
     //   let percentageFilled = (volunteers / volunteers_required * 100);
@@ -37,7 +39,7 @@ class AdminView extends Component {
     if (events.length) {
       return (
         <React.Fragment>
-
+          asf
         </React.Fragment>
       );
     } else {
