@@ -76,6 +76,10 @@ class UserTable extends Component {
                                     animate
                                 />
                                 <Link to="/orgs/1/events"><button className="btn btn-warning" style={{marginTop: "20px"}}>Back</button></Link>
+                                <div style={{position: "absolute", bottom: "5px"}}>
+                                    <a href="/user/csv" target="_blank"><button className="btn btn-light" style={{marginRight: "3px"}}>Export users</button></a>
+                                    <a href="/event/csv" target="_blank"><button className="btn btn-light">Export events</button></a>
+                                </div>
                             </div>
                         </div>
 
@@ -105,11 +109,6 @@ const mapStateToProps = state => ({
     adminEvent: state.adminEvent[state.adminEvent.length-1],
 })
 
-const mapDispatchToProps = {
-
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(UserTable);
+export default connect(mapStateToProps, null)(UserTable);
 
 
