@@ -9,6 +9,7 @@ class UserTable extends Component {
     render() {
         const { adminEvent } = this.props;
         const { users } = this.props.adminEvent;
+        console.log('admin', this.props.adminEvent);
         const columns = [
             {
                 style: { display: 'flex', alignItems: 'center' },
@@ -39,7 +40,6 @@ class UserTable extends Component {
 
         ]
         if (users) {
-            console.log(users);
             return (
 
                 <React.Fragment>
@@ -97,7 +97,7 @@ class UserTable extends Component {
 }
 
 const mapStateToProps = state => ({
-    adminEvent: state.adminEvent[0],
+    adminEvent: state.adminEvent[state.adminEvent.length-1],
 })
 
 const mapDispatchToProps = {
