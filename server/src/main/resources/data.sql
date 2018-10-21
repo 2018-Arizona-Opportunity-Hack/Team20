@@ -4,8 +4,6 @@ INSERT INTO organization (address, name, phone) VALUES
   ('124 n. random st', 'Paz de Cristo', '123-123-1312'),
   ('124 n. random st', 'Paz de Cristo', '123-123-1312');
 
-
-
 INSERT INTO users (name, phone, organization_id) VALUES
   ('James McGill', '14802430207', 1),
   ('Chuck McGill', '602-123-1521', 1);
