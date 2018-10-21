@@ -5,6 +5,7 @@ import com.nexmo.client.auth.AuthMethod;
 import com.nexmo.client.auth.TokenAuthMethod;
 import com.nexmo.client.sms.SmsSubmissionResult;
 import com.nexmo.client.sms.messages.TextMessage;
+import com.team20.team20.env.Environment;
 import com.team20.team20.nexmo.InboundSms;
 import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.stereotype.Controller;
@@ -18,11 +19,11 @@ public class SmsResponseController {
     public String hello(@PathVariable String phoneNumber) throws Exception {
         System.out.println("got a hit");
 
-        Dotenv dotenv = Dotenv.load();
-        String NEXMO_PHONE_NUMBER = dotenv.get("NEXMO_PHONE_NUMBER");
+        Environment env = new Environment();
+        String NEXMO_PHONE_NUMBER = env.get("NEXMO_PHONE_NUMBER");
 
-        String API_KEY = dotenv.get("NEXMO_API_KEY");
-        String API_SECRET = dotenv.get("NEXMO_API_SECRET");
+        String API_KEY = env.get("NEXMO_API_KEY");
+        String API_SECRET = env.get("NEXMO_API_SECRET");
 
         AuthMethod auth = new TokenAuthMethod(API_KEY, API_SECRET);
         NexmoClient client = new NexmoClient(auth);
