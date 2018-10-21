@@ -51,14 +51,14 @@ public class SmsResponseController {
         User user = userRepository.findUserByPhone(inboundSms.getMsisdn());
         List<EventUser> eventUsers = eventUserRepository.findByUserId(user.getId());
         List<Communication> communications = eventUsers.stream().flatMap(eventUser -> {
-            return communicationRepository.findByEventUser_IdOrderByIdDesc(eventUser.getUser().getId()).stream();
+            return communicationRepository.findByEventUser_IdOrderByIdDesc(eventUser.getId()).stream();
         })
         .sorted((ele1, ele2) -> {
-            return Math.toIntExact(ele1.getId() - ele2.getId());
+            return Math.toIntExact(ele2.getId() - ele1.getId());
         }).collect(Collectors.toList());
 
         for (Communication communication : communications) {
-            if(communication.getEventUser().getUser().getPhone() == inboundSms.getMsisdn()) {
+            if(communication.getEventUser().getUser().getPhone().equals(inboundSms.getMsisdn())) {
                 if(inboundSms.getText().equals("Y")) {
                     communication.setResponse(true);
                 } else if (inboundSms.getText().equals("N")) {
