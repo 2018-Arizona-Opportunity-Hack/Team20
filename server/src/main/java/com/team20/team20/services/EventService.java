@@ -88,15 +88,14 @@ public class EventService {
 
             List<Communication> communications = communicationRepository.findByEventUser_IdOrderByIdDesc(eventUser.getId());
             for(Communication communication: communications) {
-                if(communication.getResponse() != null) {
-                    if(communication.getResponse()) {
-                        numberGoing += weighted;
-                    }
-                    break;
+                if(communication.getResponse() != null && !communication.getResponse()) {
+                    // if the user said they are NOT going, set user probability to zero
+                    weighted = 0f;
                 }
             }
+
+            numberGoing += weighted;
         }
-        VolunteerEvent volunteerEvent = new VolunteerEvent(event, numberGoing);
         return numberGoing;
     }
 
