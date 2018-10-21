@@ -61,7 +61,7 @@ class UserTable extends Component {
                                 <h2 style={{ color: "white" }}>   {adminEvent.event.title}</h2>
                                 <h5 style={{ color: "white" }}>   {moment(adminEvent.event.date).format('LL')}</h5>
                                 <h5 style={{ color: "white" }}>   {moment(adminEvent.event.date).format('LT')}</h5>
-                                <h6 style={{ color: "white" }}>   ({moment(adminEvent.event.date, "YYYYMMDD").fromNow()})</h6> 
+                                <h6 style={{ color: "white" }}>   ({moment(adminEvent.event.date, "YYYYMMDD").fromNow()})</h6>
                             </span>
 
                             <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>

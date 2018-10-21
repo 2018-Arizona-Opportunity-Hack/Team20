@@ -12,10 +12,10 @@ import { fetchEventAdmin } from "../redux/actions/adminEventAction";
 class AdminView extends Component {
   componentDidMount() {
     const { event_id } = this.props.match.params;
-    if (this.props.match) {
-      this.props.fetchEventAdmin(event_id)
-    } else {
-      return <div>Loading...</div>
+    if (!event_id) {
+        return <div>Loading...</div>
+      } else {
+        this.props.fetchEventAdmin(event_id)
     }
   }
 
@@ -25,6 +25,7 @@ class AdminView extends Component {
     if (!adminEvent) {
       return <div>Loading...</div>
     } else {
+      console.log(adminEvent)
       return (
         <React.Fragment>
           <UserTable />
