@@ -60,6 +60,20 @@ class SignupModal extends Component {
     return false;
   }
 
+  handleNamePlaceholder = () => {
+    if(!localStorage.getItem('name')){
+      return "Enter full name";
+    }
+    return localStorage.getItem('name');
+  }
+
+  handlePhonePlaceholder = () => {
+    if(!localStorage.getItem('phone')){
+      return "Enter phone number (e.g. 555-555-5555)";
+    }
+    return localStorage.getItem('phone');
+  }
+
   render() {
     const onSubmit = async values => {
       await sleep(300);
@@ -119,7 +133,7 @@ class SignupModal extends Component {
                         name="name"
                         type="text"
                         component={AdaptedInput}
-                        placeholder="Enter full name"
+                        placeholder={this.handleNamePlaceholder()}
                         control
                       />
                       <Error name="name" />
@@ -129,7 +143,7 @@ class SignupModal extends Component {
                       <Field
                         name="phone"
                         component={AdaptedInput}
-                        placeholder="Enter phone number (e.g. 555-555-5555)"
+                        placeholder={this.handlePhonePlaceholder()}
                         control
                       />
                       <Error name="phone" />
