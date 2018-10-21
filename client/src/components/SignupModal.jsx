@@ -27,7 +27,6 @@ class SignupModal extends Component {
 
   toggle = () => {
     if (localStorage.getItem('name') && localStorage.getItem('phone')) {
-      // remember to inclue event_ID
       this.props.signupEvent(
         localStorage.getItem('name'),
         localStorage.getItem('phone'),
@@ -85,7 +84,6 @@ class SignupModal extends Component {
         localStorage.setItem('event_ID', this.props.event_ID);
         localStorage.setItem('name', values.name);
         localStorage.setItem('phone', values.phone);
-        // console.log(values)
         this.props.signupEvent(values.name, values.phone, this.props.event_ID, this.props.history);
       }
 
@@ -111,7 +109,6 @@ class SignupModal extends Component {
         }
       </Field>
     );
-    // const isPhoneNum = inputPhoneNum => ((inputPhoneNum.match(phoneRegEx)) ? null : "Required")
     const required = value => (value ? null : "Required");
     const { events } = this.props;
     if (!events.length) {
@@ -119,7 +116,7 @@ class SignupModal extends Component {
     } else {
       return (
         <div>
-          <Button style={{ backgroundColor: "green" }} onClick={this.toggle}>Volunteer!</Button>
+          <Button style={{ marginLeft: "10px" }} variant="success" onClick={this.toggle}>Volunteer</Button>
           <Modal isOpen={this.state.modal} toggle={this.toggle} >
             <ModalHeader toggle={this.toggle}>Volunteer Form</ModalHeader>
             <ModalBody >
