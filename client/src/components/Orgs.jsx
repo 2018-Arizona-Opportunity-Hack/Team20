@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { signupEvent } from '../redux/actions/eventActions';
-import {
-  Button,
-  Typography
-} from "smooth-ui";
+import { Button } from "smooth-ui";
 import ReactTable from 'react-table';
 import "react-table/react-table.css";
 import moment from 'moment';
@@ -87,7 +84,6 @@ class Orgs extends Component {
     if (!events.length) {
       return <div>Loading...</div>
     } else {
-      console.log(this.props)
       return (
         <React.Fragment>
           <div style={{

@@ -4,6 +4,7 @@ import { Progress } from 'reactstrap';
 import ReactTable from 'react-table';
 import PieChart from 'react-minimal-pie-chart';
 import "react-table/react-table.css";
+import moment from 'moment';
 
 class UserTable extends Component {
     render() {
@@ -57,7 +58,10 @@ class UserTable extends Component {
                         <div style={{ width: "100%", height: "200px", textAlign: "center", marginTop: "5px", display: "flex", flexDirection: "column", alignItems: "center" }}>
                             <span style={{ marginBottom: "50px" }}>
                                 <h2 style={{ color: "white" }}>   {adminEvent.event.title}</h2>
-                                <h5 style={{ color: "white" }}>   {adminEvent.event.date}</h5>
+                                <h5 style={{ color: "white" }}>   {moment(adminEvent.event.date).format('LL')}</h5>
+                                <h5 style={{ color: "white" }}>   {moment(adminEvent.event.date).format('LT')}</h5>
+                                <h6 style={{ color: "white" }}>   ({moment(adminEvent.event.date, "YYYYMMDD").fromNow()})</h6>
+                                
                             </span>
 
                             <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>

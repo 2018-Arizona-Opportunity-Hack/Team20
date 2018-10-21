@@ -4,7 +4,6 @@ import {
 } from './types';
 
 import axios from 'axios';
-import moment from 'moment';
 
 export const fetchEvents = () => dispatch => {
   axios.get('/orgs/1/events')
