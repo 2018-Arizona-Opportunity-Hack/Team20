@@ -38,15 +38,22 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public Long createUser(@RequestBody UserDTO user) {
+    public Long eventRegistration(@RequestBody UserDTO user) {
         User userStuff;
+        String cleanPhone = user.getUser().getPhone().replaceAll("[^0-9]","");
+        if(cleanPhone.length() == 10)
+            cleanPhone = "1" + cleanPhone;
+        user.getUser().setPhone(cleanPhone);
         userStuff = userRepository.findUserByPhone(user.getUser().getPhone());
         if(userStuff == null) {
             userStuff = user.getUser();
             userStuff.setOrganization(organizationRepository.findById(user.getOrganizationId()).orElse(null));
             userStuff = userRepository.save(user.getUser());
         }
-        eventUserRepository.save(new EventUser(null, userStuff, eventRepository.findById(user.getEventId()).orElse(null), null));
+        EventUser eventUser = eventUserRepository.findEventUserByUserIdAndEventId(userStuff.getId(), user.getEventId());
+        if(eventUser == null) {
+            eventUserRepository.save(new EventUser(null, userStuff, eventRepository.findById(user.getEventId()).orElse(null), null));
+        }
         return user.getUser().getId();
     }
 

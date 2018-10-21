@@ -40,15 +40,18 @@ public class EventService {
         List<User> users = new ArrayList<>();
         for(EventUser eventUser: eventUsers) {
             List<Communication> communications = communicationRepository.findByEventUser_IdOrderByIdDesc(eventUser.getUser().getId());
+            boolean theyAreGoing = true;
             for(Communication communication: communications) {
                 if(communication.getResponse() != null) {
-                    if(communication.getResponse()) {
-                        User user = userRepository.findById(eventUser.getUser().getId()).orElse(null);
-                        users.add(user);
-                    } else {
-                        break;
+                    if(!communication.getResponse()) {
+                        theyAreGoing = false;
                     }
                 }
+            }
+
+            if(theyAreGoing){
+                User user = userRepository.findById(eventUser.getUser().getId()).orElse(null);
+                users.add(user);
             }
         }
         return users;
@@ -56,25 +59,27 @@ public class EventService {
 
     public Float getUserProbablity(Long userId) {
         List<EventUser> userHistory = eventUserRepository.findByUserId(userId).stream().filter(
-                historicalEvent -> historicalEvent.getAttend() != null).collect(Collectors.toList());
-        Integer truth = 0;
+                historicalEvent -> historicalEvent.getAttend() != null).collect(Collectors.toList()); // get only historical events
+        Integer eventsTheyWereHonestAbout = userHistory.size();
+        Float weighted;
         for(EventUser historicalEvent: userHistory) {
+            boolean theySaidTheyAreNotGoing = false;
             List<Communication> communications = communicationRepository.findByEventUser_IdOrderByIdDesc(historicalEvent.getId());
             for(Communication communication: communications) {
-                if(communication.getResponse() != null) {
-                    if(communication.getResponse()) {
-                        truth++;
-                    }
-                    break;
+                if(!communication.getResponse()) {
+                    theySaidTheyAreNotGoing = true;
                 }
+            }
+
+            if(!theySaidTheyAreNotGoing && !historicalEvent.getAttend()){
+                eventsTheyWereHonestAbout -= 1;
             }
         }
 
-        Float weighted;
         if(userHistory.size() == 0) {
             weighted = 1f;
         } else {
-            weighted = truth.floatValue() / userHistory.size();
+            weighted = eventsTheyWereHonestAbout.floatValue() / userHistory.size();
         }
         return weighted;
     }
