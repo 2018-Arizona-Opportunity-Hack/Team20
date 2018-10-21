@@ -12,7 +12,7 @@ export default (state = [], action) => {
         name: "Paz de Cristo",
         phone: "123-123-1312",
       }
-      return [...state, ...action.payload];
+      return [...action.payload];
 
     default:
       return state;

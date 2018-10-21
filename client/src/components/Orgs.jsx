@@ -51,19 +51,19 @@ class Orgs extends Component {
         style: { display: 'flex', alignItems: 'center' },
         Header: <h3>Name</h3>,
         maxWidth: 300,
-        accessor: 'title' 
+        accessor: 'title'
       },
       {
         style: { alignSelf: 'center' },
         Header: <h3>Status</h3>,
-        accessor: 'events', 
+        accessor: 'events',
         Cell: (props) => renderStatus(props.original.remaining, props.original.desiredAttendees, props.original.id)
       },
       {
         style: { display: 'flex', alignItems: 'center' },
         Header: <h3>Date</h3>,
         maxWidth: 300,
-        accessor: `date`, 
+        accessor: `date`,
         Cell: (props) =>
           <div style={{display: "flex", justifyContent:"space-between", flexDirection:"column"}}>
           <span>
@@ -100,9 +100,9 @@ class Orgs extends Component {
             <div style={{ width: "100%", height: "200px", textAlign: "center", marginTop: "5px", display: "flex", flexDirection: "column", alignItems: "center" }}>
               <span style={{ marginBottom: "50px" }}>
                 <h2 style={{ color: "white" }}> Paz de Cristo </h2>
-                <h5 style={{ color: "white" }}> 124 n. random st </h5>
+                <h5 style={{ color: "white" }}> 424 W. Broadway Rd. </h5>
                 <span>
-                  123-123-1312
+                  480-464-2370
                 </span>
               </span>
               <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
@@ -115,10 +115,17 @@ class Orgs extends Component {
             }}>
               <ReactTable
                 defaultSorted={[
+<<<<<<< HEAD
                   {
                     id: "date",
                     desc: false
                   }
+=======
+                    {
+                      id: "date",
+                      desc: false,
+                    }
+>>>>>>> f58df58799de290b97b19a58a1732f5f728716a6
                 ]}
                 style={{ height: window.innerHeight }}
                 defaultPageSize={10}
