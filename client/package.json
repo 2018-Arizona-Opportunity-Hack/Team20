@@ -1,6 +1,7 @@
 {
   "name": "client",
   "version": "0.1.0",
+  "proxy": "https://op-hack-2018-team20.herokuapp.com/",
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
@@ -10,10 +11,12 @@
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-final-form": "^3.6.7",
+    "react-minimal-pie-chart": "^3.3.0",
     "react-phone-number-input": "^2.2.15",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.0.5",
+    "react-sidenav": "^3.1.1",
     "react-table": "^6.8.6",
     "reactstrap": "^6.5.0",
     "redux": "^4.0.1",

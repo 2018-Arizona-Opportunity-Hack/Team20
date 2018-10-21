@@ -1,60 +1,47 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
 
-import { Progress } from 'reactstrap';
-import ReactTable from 'react-table';
+import UserTable from './UserTable';
 import "react-table/react-table.css";
-import moment from 'moment';
+
+import { fetchEventAdmin } from "../redux/actions/adminEventAction";
+
+
 
 class AdminView extends Component {
-
-  render() {
+  componentDidMount() {
     const { event_id } = this.props.match.params;
-    const { events } = this.props;
-    console.log(event_id)
-    // const renderStatus = (volunteers, volunteers_required) => {
-    //   let alertStatus;
-    //   let percentageFilled = (volunteers / volunteers_required * 100);
-    //   if (percentageFilled === 100) {
-    //     alertStatus = "#57d500"
-    //   } else if (percentageFilled > 0 && percentageFilled < 50) {
-    //     alertStatus = "#ff2e00";
-    //   } else if (percentageFilled >= 50 && percentageFilled <= 100) {
-    //     alertStatus = "#ffbf00";
-    //   }
-    //   return (
-
-    //     <div style={{ display: 'flex', justifyContent: "space-between" }}>
-    //       <span style={{
-    //         color: alertStatus,
-    //         transition: 'all .3s ease',
-    //       }}>
-    //         &#x25cf;&nbsp;&nbsp;
-    //            <span style={{ color: 'black' }}>{volunteers_required} volunteers needed</span>
-    //       </span>
-    //     </div>
-    //   )
-    // }
-
-    if (events.length) {
-      return (
-        <React.Fragment>
-          asf
-        </React.Fragment>
-      );
+    if (this.props.match) {
+      this.props.fetchEventAdmin(event_id)
     } else {
       return <div>Loading...</div>
+    }
+  }
+
+  render() {
+    const { adminEvent } = this.props;
+
+    if (!adminEvent) {
+      return <div>Loading...</div>
+    } else {
+      return (
+        <React.Fragment>
+          <UserTable />
+        </React.Fragment>
+      );
     }
   }
 }
 
 const mapStateToProps = state => ({
-  events: state.events,
+  adminEvent: state.adminEvent[0],
 })
 
 const mapDispatchToProps = {
-
+  fetchEventAdmin
 }
 
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AdminView));
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminView);
+// export default connect(mapStateToProps, mapDispatchToProps)(AdminView);

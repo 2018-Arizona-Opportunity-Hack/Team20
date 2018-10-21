@@ -1,19 +1,23 @@
 import {
-  FETCH_EVENTS,
-  FETCH_EVENT
+  FETCH_EVENTS
 } from '../actions/types';
 
 
 export default (state = [], action) => {
   switch (action.type) {
     case FETCH_EVENTS:
+      let org = {
+        id: 1,
+        address: "124 n. random st",
+        name: "Paz de Cristo",
+        phone: "123-123-1312",
+      }
       return [...state, ...action.payload];
-
-    case FETCH_EVENT:
-      let event = state.filter((event) => event.id === action.payload)
-      return event;
 
     default:
       return state;
   }
 }
+
+
+// /orgs/{orgId}/events"
