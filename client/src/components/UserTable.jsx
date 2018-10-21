@@ -5,6 +5,7 @@ import ReactTable from 'react-table';
 import PieChart from 'react-minimal-pie-chart';
 import "react-table/react-table.css";
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 class UserTable extends Component {
     render() {
@@ -60,8 +61,7 @@ class UserTable extends Component {
                                 <h2 style={{ color: "white" }}>   {adminEvent.event.title}</h2>
                                 <h5 style={{ color: "white" }}>   {moment(adminEvent.event.date).format('LL')}</h5>
                                 <h5 style={{ color: "white" }}>   {moment(adminEvent.event.date).format('LT')}</h5>
-                                <h6 style={{ color: "white" }}>   ({moment(adminEvent.event.date, "YYYYMMDD").fromNow()})</h6>
-                                
+                                <h6 style={{ color: "white" }}>   ({moment(adminEvent.event.date, "YYYYMMDD").fromNow()})</h6> 
                             </span>
 
                             <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
@@ -75,6 +75,7 @@ class UserTable extends Component {
                                     lengthAngle={180}
                                     animate
                                 />
+                                <Link to="/orgs/1/events"><button className="btn btn-warning" style={{marginTop: "20px"}}>Back</button></Link>
                             </div>
                         </div>
 
