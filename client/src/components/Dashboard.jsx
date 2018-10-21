@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 
-import { fetchEvent } from '../redux/actions/eventActions';
+import { signupEvent } from '../redux/actions/eventActions';
 
 import {
   Button,
@@ -31,14 +31,14 @@ class Dashboard extends Component {
         alertStatus = "#ffbf00";
       }
         return (
-          
+
           <div style={{display: 'flex', justifyContent: "space-between", alignItems: "center"}}>
             <span style ={{
               color: alertStatus ,
               transition: 'all .3s ease',
             }}>
             &#x25cf;&nbsp;&nbsp;
-               <span style={{ color: 'black' }}>{volunteers_required} volunteers needed</span>
+               <span style={{ color: 'black' }}>{volunteers} volunteers needed</span>
             </span>
             <span style={{display: "flex"}}>
 
@@ -48,30 +48,29 @@ class Dashboard extends Component {
               <SignupModal event_ID={event_ID}/>
             </span>
           </div>
-        ) 
+        )
     }
     const columns = [
-      { 
+      {
         style: { display: 'flex', alignItems: 'center' },
         Header: <h3>Name</h3>,
-        accessor: 'name' // String-based value accessors!
+        accessor: 'title' // String-based value accessors!
       },
       {
-        style: { display: 'flex', alignItems: 'center' },        
+        style: { display: 'flex', alignItems: 'center' },
         Header: <h3>Time</h3>,
-        accessor: 'time' // String-based value accessors!
+        accessor: 'date' // String-based value accessors!
       },
       {
         Header: <h3>Status</h3>,
-        accessor: 'events', // String-based value accessors! 
-        Cell: (props) => renderStatus(props.original.volunteers, props.original.volunteers_required, props.original.id)
+        accessor: 'events', // String-based value accessors!
+        Cell: (props) => renderStatus(props.original.remaining, props.original.desiredAttendees, props.original.id)
       },
     ]
     if (events.length) {
       return (
         <div>
           <ReactTable
-            // showPaginationBottom={false}
             defaultPageSize={5}
             data={events}
             columns={columns}
@@ -90,7 +89,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  fetchEvent
+  signupEvent
 }
 
 

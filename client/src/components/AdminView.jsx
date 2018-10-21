@@ -5,13 +5,25 @@ import { Progress } from 'reactstrap';
 import ReactTable from 'react-table';
 import "react-table/react-table.css";
 import moment from 'moment';
+import {fetchEventAdmin} from "../redux/actions/adminEventAction";
+
+
 
 class AdminView extends Component {
+  componentDidMount(){
+    // console.log( this.props.match.params.event_id)
+      if(this.props.match){
+          this.props.fetchEventAdmin(this.props.match.param.event_id);
+      }else{
+        return <div>Loading...</div>
+      }
+  }
 
   render() {
-    const { event_id } = this.props.match.params;
-    const { events } = this.props;
-    console.log(event_id)
+    // const { event_id } = this.props.match.params;
+    const { adminEvent } = this.props;
+    console.log(this.props)
+
     // const renderStatus = (volunteers, volunteers_required) => {
     //   let alertStatus;
     //   let percentageFilled = (volunteers / volunteers_required * 100);
@@ -36,7 +48,7 @@ class AdminView extends Component {
     //   )
     // }
 
-    if (events.length) {
+    if (adminEvent) {
       return (
         <React.Fragment>
           asf
@@ -49,11 +61,11 @@ class AdminView extends Component {
 }
 
 const mapStateToProps = state => ({
-  events: state.events,
+    adminEvent: state.adminEvent,
 })
 
 const mapDispatchToProps = {
-
+    fetchEventAdmin
 }
 
 

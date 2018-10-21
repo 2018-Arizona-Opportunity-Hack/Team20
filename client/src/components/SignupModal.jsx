@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { signupEvent } from '../redux/actions/eventActions';
+
+
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { Form, Field } from "react-final-form";
 import {
@@ -14,6 +17,7 @@ import {
   Typography
 } from "smooth-ui";
 import "react-table/react-table.css";
+import {withRouter} from "react-router-dom";
 
 class SignupModal extends Component {
   state = {
@@ -24,7 +28,11 @@ class SignupModal extends Component {
   toggle = () => {
     if (localStorage.getItem('name') && localStorage.getItem('phone')) {
       // remember to inclue event_ID
-      console.log('already signed', localStorage.getItem('name'), localStorage.getItem('phone'))
+        this.props.signupEvent(
+            localStorage.getItem('name'),
+            localStorage.getItem('phone'),
+            this.props.event_ID,
+            this.props.history);
     } else {
       this.setState({
         modal: !this.state.modal
@@ -59,7 +67,8 @@ class SignupModal extends Component {
         localStorage.setItem('event_ID', this.props.event_ID);
         localStorage.setItem('name', values.name);
         localStorage.setItem('phone', values.phone);
-        console.log(values)
+        // console.log(values)
+        this.props.signupEvent(values.name, values.phone, this.props.event_ID, this.props.history);
       }
     };
 
@@ -83,6 +92,7 @@ class SignupModal extends Component {
     // const isPhoneNum = inputPhoneNum => ((inputPhoneNum.match(phoneRegEx)) ? null : "Required")
     const required = value => (value ? null : "Required");
     const { events } = this.props;
+    console.log(this.props)
     if (events.length) {
       return (
         <div>
@@ -143,8 +153,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-
+    signupEvent
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignupModal);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SignupModal));
