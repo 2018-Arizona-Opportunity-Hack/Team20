@@ -10,9 +10,9 @@ import { HashRouter } from 'react-router-dom';
 
 ReactDOM.render(
 
-    <HashRouter>
   <Provider store={store}>
+      <HashRouter>
       <App />
-  </Provider>
     </HashRouter>
+  </Provider>
   , document.getElementById('root'));

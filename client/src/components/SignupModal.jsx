@@ -9,36 +9,42 @@ import { Form, Field } from "react-final-form";
 import {
   Box,
   Button,
-  ControlFeedback,
+  // ControlFeedback,
   FormGroup,
   Input,
   Label,
-  Textarea,
-  Typography
+  // Textarea,
+  // Typography
 } from "smooth-ui";
 import "react-table/react-table.css";
-import {withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 class SignupModal extends Component {
-  state = {
-    modal: false,
-    phoneNumValue: ''
-  };
+  constructor() {
+    super();
+    this.state = {
+      modal: false,
+      phoneNumValue: '',
+      nameVal: ''
+    };
+    console.log("im constructed");
+  }
 
   toggle = () => {
-    if (localStorage.getItem('name') && localStorage.getItem('phone')) {
-      // remember to inclue event_ID
-        this.props.signupEvent(
-            localStorage.getItem('name'),
-            localStorage.getItem('phone'),
-            this.props.event_ID,
-            this.props.history);
-    } else {
-      this.setState({
-        modal: !this.state.modal
-      });
-    }
+    this.setState({
+      modal: !this.state.modal,
+      nameVal: localStorage.getItem('name'),
+      phoneNumValue: localStorage.getItem('phone')
+    });
   }
+
+  handleName = e => {
+    this.setState({nameVal: e.target.value})
+  };
+
+  handlePhoneNumber = e => {
+    this.setState({phoneNumValue: e.target.value})
+  };
 
   isPhoneNum = (inputPhoneNum) => {
     const phoneRegEx = /^[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-/\s.]?[0-9]{4}$/;
@@ -56,93 +62,80 @@ class SignupModal extends Component {
     return false;
   }
 
+  handleNamePlaceholder = () => {
+    if(!localStorage.getItem('name')){
+      return "Enter full name";
+    }
+    return localStorage.getItem('name');
+  }
+
+  handlePhonePlaceholder = () => {
+    if(!localStorage.getItem('phone')){
+      return "Enter phone number (e.g. 555-555-5555)";
+    }
+    return localStorage.getItem('phone');
+  }
+
   render() {
-    const onSubmit = async values => {
-      await sleep(300);
+    const onSubmit = () => {
+      let values = {phone: this.state.phoneNumValue, name: this.state.nameVal}
       if (!this.isPhoneNum(values.phone)) {
         alert('Invalid phone number')
+
       } else if (!this.isName(values.name)) {
         alert('Invalid name')
+
       } else {
         localStorage.setItem('event_ID', this.props.event_ID);
         localStorage.setItem('name', values.name);
         localStorage.setItem('phone', values.phone);
-        // console.log(values)
-        this.props.signupEvent(values.name, values.phone, this.props.event_ID, this.props.history);
+        this.props.signupEvent(values.name, values.phone, this.props.event_ID);
       }
+
+      this.setState({
+        modal: !this.state.modal
+      });
     };
-
-    const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-    const adapt = Component => ({
-      input,
-      meta: { valid },
-      ...rest
-    }) => <Component {...input} {...rest} />;
-    const AdaptedInput = adapt(Input);
-
-    const Error = ({ name }) => (
-      <Field name={name} subscription={{ error: true, touched: true }}>
-        {({ meta: { touched, error } }) =>
-          touched && error ? (
-            <ControlFeedback valid={!error}>{error}</ControlFeedback>
-          ) : null
-        }
-      </Field>
-    );
-    // const isPhoneNum = inputPhoneNum => ((inputPhoneNum.match(phoneRegEx)) ? null : "Required")
-    const required = value => (value ? null : "Required");
     const { events } = this.props;
     if (!events.length) {
       return <div>Loading...</div>
     } else {
-          return (
-            <div>
-              <Button style={{ backgroundColor: "green" }} onClick={this.toggle}>Volunteer!</Button>
-              <Modal isOpen={this.state.modal} toggle={this.toggle} >
-                <ModalHeader toggle={this.toggle}>Volunteer Form</ModalHeader>
-                <ModalBody >
-                  <Form
-                    onSubmit={onSubmit}
-                    render={({ handleSubmit, form, submitting, pristine, values }) => (
-                      <form onSubmit={handleSubmit}>
-                        <FormGroup>
-                          <Label>Name</Label>
-                          <Field
-                            name="name"
-                            type="text"
-                            component={AdaptedInput}
-                            placeholder="Enter full name"
-                            control
-                          />
-                          <Error name="name" />
-                        </FormGroup>
-                        <FormGroup>
-                          <Label>Phone Number</Label>
-                          <Field
-                            name="phone"
-                            component={AdaptedInput}
-                            placeholder="Enter phone number (e.g. 555-555-5555)"
-                            control
-                          />
-                          <Error name="phone" />
-                        </FormGroup>
-    
-                        <Box justifyContent="">
-                          <Button
-                            type="submit"
-                            disabled={submitting || pristine}
-                            variant="primary"
-                          >
-                            Submit
-                         </Button>
-                        </Box>
-                      </form>
-                    )}
-                  />
-                </ModalBody>
-              </Modal>
-            </div>
-          );
+      return (
+        <div>
+          <Button style={{ marginLeft: "10px" }} variant="success" onClick={this.toggle}>Volunteer</Button>
+          <Modal isOpen={this.state.modal} toggle={this.toggle} >
+            <ModalHeader toggle={this.toggle}>Volunteer Form</ModalHeader>
+            <ModalBody >
+          
+                      <Label>Name</Label>
+                      <div>
+                        <input
+                          name="name"
+                          value={this.state.nameVal}
+                          onChange={this.handleName}
+                          className="form-control"
+                        />
+                      </div>
+
+                      <Label style={{paddingTop: "10px"}}>Phone Number</Label>
+                      <div>
+                        <input
+                          name="phone"
+                          value={this.state.phoneNumValue}
+                          onChange={this.handlePhoneNumber}
+                          className="form-control"
+                        />
+                      </div>
+
+                      <Button
+                        style={{marginTop: "10px"}}
+                        onClick={onSubmit}
+                        variant="success">Sign up</Button>
+
+            </ModalBody>
+          </Modal>
+        </div>
+      );
     }
   }
 }
@@ -152,10 +145,10 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-    signupEvent
+  signupEvent
 }
 
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SignupModal));
+export default connect(mapStateToProps, mapDispatchToProps)(SignupModal);
 
 // export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SignupModal));

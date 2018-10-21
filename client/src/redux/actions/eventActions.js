@@ -4,7 +4,6 @@ import {
 } from './types';
 
 import axios from 'axios';
-import moment from 'moment';
 
 export const fetchEvents = () => dispatch => {
   axios.get('/orgs/1/events')
@@ -17,7 +16,7 @@ export const fetchEvents = () => dispatch => {
   })
 }
 
-export const signupEvent = (name, phoneNumber, eventId, history) => dispatch =>{
+export const signupEvent = (name, phoneNumber, eventId) => dispatch =>{
   let postBody = {
     eventId: eventId,
     organizationId: 1,
@@ -27,7 +26,4 @@ export const signupEvent = (name, phoneNumber, eventId, history) => dispatch =>{
     }
   }
   axios.post('/register', postBody)
-      .then(()=>{
-        history.push('/dashboard')
-      })
 }

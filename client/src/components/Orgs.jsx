@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { signupEvent } from '../redux/actions/eventActions';
-import {
-  Button,
-  Typography
-} from "smooth-ui";
+import { Button } from "smooth-ui";
 import ReactTable from 'react-table';
 import "react-table/react-table.css";
 import moment from 'moment';
@@ -37,11 +33,11 @@ class Orgs extends Component {
             transition: 'all .3s ease',
           }}>
             &#x25cf;&nbsp;&nbsp;
-               <span style={{ color: 'black' }}>{remaining} volunteers needed</span>
+               <span style={{ color: 'black' }}>{Math.ceil(remaining)} volunteers needed</span>
           </span>
           <span style={{ display: "flex", alignItems: "center", paddingRight: "20px" }}>
             <Link to={`/dashboard/admin/event/${event_ID}`}>
-              <Button>
+              <Button variant="info">
                 Admin
                </Button>
             </Link>
@@ -55,25 +51,39 @@ class Orgs extends Component {
         style: { display: 'flex', alignItems: 'center' },
         Header: <h3>Name</h3>,
         maxWidth: 300,
-        accessor: 'title' // String-based value accessors!
+        accessor: 'title'
       },
       {
         style: { alignSelf: 'center' },
         Header: <h3>Status</h3>,
-        accessor: 'events', // String-based value accessors!
+        accessor: 'events',
         Cell: (props) => renderStatus(props.original.remaining, props.original.desiredAttendees, props.original.id)
       },
       {
         style: { display: 'flex', alignItems: 'center' },
         Header: <h3>Date</h3>,
         maxWidth: 300,
-        accessor: 'date' // String-based value accessors!
+        accessor: `date`,
+        Cell: (props) =>
+          <div style={{display: "flex", justifyContent:"space-between", flexDirection:"column"}}>
+          <span>
+
+              {moment(props.original.date).format('LL')}
+          </span>
+          <span>
+
+              {moment(props.original.date).format('LT')}
+          </span>
+          <span>
+
+              {moment(props.original.date, "YYYYMMDD").fromNow()}
+          </span>
+          </div>
       },
     ]
     if (!events.length) {
       return <div>Loading...</div>
     } else {
-      console.log(this.props)
       return (
         <React.Fragment>
           <div style={{
@@ -89,14 +99,13 @@ class Orgs extends Component {
 
             <div style={{ width: "100%", height: "200px", textAlign: "center", marginTop: "5px", display: "flex", flexDirection: "column", alignItems: "center" }}>
               <span style={{ marginBottom: "50px" }}>
-                {/* <h2 style={{ color: "white" }}>   {adminEvent.event.title}</h2> */}
-                {/* <h5 style={{ color: "white" }}>   {adminEvent.event.date}</h5> */}
+                <h2 style={{ color: "white" }}> Paz de Cristo </h2>
+                <h5 style={{ color: "white" }}> 124 n. random st </h5>
+                <span>
+                  123-123-1312
+                </span>
               </span>
-
               <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                {/* <h2 style={{ color: "white" }}>Status</h2> */}
-                {/* <h1 style={{ color: "white", fontWeight: "600", fontSize: "50px" }}>{adminEvent.numberGoing / adminEvent.event.desiredAttendees * 100}</h1> */}
-
               </div>
             </div>
           </div>
@@ -105,6 +114,12 @@ class Orgs extends Component {
               width: "100%"
             }}>
               <ReactTable
+                defaultSorted={[
+                    {
+                      id: "date",
+                      desc: false,
+                    }
+                ]}
                 style={{ height: window.innerHeight }}
                 defaultPageSize={10}
                 data={events}
@@ -128,4 +143,4 @@ const mapDispatchToProps = {
 }
 
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Orgs));
+export default connect(mapStateToProps, mapDispatchToProps)(Orgs);

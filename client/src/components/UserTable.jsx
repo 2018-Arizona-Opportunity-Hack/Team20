@@ -4,11 +4,13 @@ import { Progress } from 'reactstrap';
 import ReactTable from 'react-table';
 import PieChart from 'react-minimal-pie-chart';
 import "react-table/react-table.css";
+import moment from 'moment';
 
 class UserTable extends Component {
     render() {
         const { adminEvent } = this.props;
         const { users } = this.props.adminEvent;
+        console.log('admin', this.props.adminEvent);
         const columns = [
             {
                 style: { display: 'flex', alignItems: 'center' },
@@ -39,7 +41,6 @@ class UserTable extends Component {
 
         ]
         if (users) {
-            console.log(users);
             return (
 
                 <React.Fragment>
@@ -57,12 +58,15 @@ class UserTable extends Component {
                         <div style={{ width: "100%", height: "200px", textAlign: "center", marginTop: "5px", display: "flex", flexDirection: "column", alignItems: "center" }}>
                             <span style={{ marginBottom: "50px" }}>
                                 <h2 style={{ color: "white" }}>   {adminEvent.event.title}</h2>
-                                <h5 style={{ color: "white" }}>   {adminEvent.event.date}</h5>
+                                <h5 style={{ color: "white" }}>   {moment(adminEvent.event.date).format('LL')}</h5>
+                                <h5 style={{ color: "white" }}>   {moment(adminEvent.event.date).format('LT')}</h5>
+                                <h6 style={{ color: "white" }}>   ({moment(adminEvent.event.date, "YYYYMMDD").fromNow()})</h6>
+                                
                             </span>
 
                             <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                                 <h2 style={{ color: "white" }}>Status</h2>
-                                <h1 style={{ color: "white", fontWeight: "600", fontSize: "50px" }}>{adminEvent.numberGoing / adminEvent.event.desiredAttendees * 100}</h1>
+                                <h1 style={{ color: "white", fontWeight: "600", fontSize: "50px" }}>{(adminEvent.numberGoing / adminEvent.event.desiredAttendees * 100).toFixed(2)}</h1>
                                 <PieChart
                                     style={{ backgroundColor: "white", borderRadius: "100%", width: "70%", margin: "0", padding: "0" }}
                                     data={[{ value: 1, key: 1, color: '#E38627' }]}
@@ -97,7 +101,7 @@ class UserTable extends Component {
 }
 
 const mapStateToProps = state => ({
-    adminEvent: state.adminEvent[0],
+    adminEvent: state.adminEvent[state.adminEvent.length-1],
 })
 
 const mapDispatchToProps = {
