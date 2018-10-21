@@ -37,11 +37,11 @@ class Orgs extends Component {
             transition: 'all .3s ease',
           }}>
             &#x25cf;&nbsp;&nbsp;
-               <span style={{ color: 'black' }}>{remaining} volunteers needed</span>
+               <span style={{ color: 'black' }}>{Math.ceil(remaining)} volunteers needed</span>
           </span>
           <span style={{ display: "flex", alignItems: "center", paddingRight: "20px" }}>
             <Link to={`/dashboard/admin/event/${event_ID}`}>
-              <Button>
+              <Button variant="info">
                 Admin
                </Button>
             </Link>
@@ -55,19 +55,19 @@ class Orgs extends Component {
         style: { display: 'flex', alignItems: 'center' },
         Header: <h3>Name</h3>,
         maxWidth: 300,
-        accessor: 'title' // String-based value accessors!
+        accessor: 'title' 
       },
       {
         style: { alignSelf: 'center' },
         Header: <h3>Status</h3>,
-        accessor: 'events', // String-based value accessors!
+        accessor: 'events', 
         Cell: (props) => renderStatus(props.original.remaining, props.original.desiredAttendees, props.original.id)
       },
       {
         style: { display: 'flex', alignItems: 'center' },
         Header: <h3>Date</h3>,
         maxWidth: 300,
-        accessor: 'date' // String-based value accessors!
+        accessor: 'date' 
       },
     ]
     if (!events.length) {
