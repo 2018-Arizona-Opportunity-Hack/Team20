@@ -115,17 +115,10 @@ class Orgs extends Component {
             }}>
               <ReactTable
                 defaultSorted={[
-<<<<<<< HEAD
                   {
                     id: "date",
                     desc: false
                   }
-=======
-                    {
-                      id: "date",
-                      desc: false,
-                    }
->>>>>>> f58df58799de290b97b19a58a1732f5f728716a6
                 ]}
                 style={{ height: window.innerHeight }}
                 defaultPageSize={10}

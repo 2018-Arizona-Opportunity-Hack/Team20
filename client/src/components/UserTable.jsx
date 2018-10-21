@@ -61,16 +61,12 @@ class UserTable extends Component {
                                 <h2 style={{ color: "white" }}>   {adminEvent.event.title}</h2>
                                 <h5 style={{ color: "white" }}>   {moment(adminEvent.event.date).format('LL')}</h5>
                                 <h5 style={{ color: "white" }}>   {moment(adminEvent.event.date).format('LT')}</h5>
-                                <h6 style={{ color: "white" }}>   ({moment(adminEvent.event.date, "YYYYMMDD").fromNow()})</h6> 
+                                <h6 style={{ color: "white" }}>   ({moment(adminEvent.event.date, "YYYYMMDD").fromNow()})</h6>
                             </span>
 
                             <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                                 <h2 style={{ color: "white" }}>Status</h2>
-<<<<<<< HEAD
-                                <h1 style={{ color: "white", fontWeight: "600", fontSize: "50px" }}>{(adminEvent.numberGoing / adminEvent.event.desiredAttendees * 100).toFixed(2)}%</h1>
-=======
                                 <h1 style={{ color: "white", fontWeight: "600", fontSize: "50px" }}>{(adminEvent.numberGoing / adminEvent.event.desiredAttendees * 100).toFixed(0)}%</h1>
->>>>>>> f58df58799de290b97b19a58a1732f5f728716a6
                                 <PieChart
                                     style={{ backgroundColor: "white", borderRadius: "100%", width: "70%", margin: "0", padding: "0" }}
                                     data={[{ value: 1, key: 1, color: '#E38627' }]}
