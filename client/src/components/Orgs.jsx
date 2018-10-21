@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import { Link, withRouter } from 'react-router-dom';
 
 import { signupEvent } from '../redux/actions/eventActions';
@@ -66,8 +65,23 @@ class Orgs extends Component {
       {
         style: { display: 'flex', alignItems: 'center' },
         Header: <h3>Date</h3>,
-        maxWidth: 300,
-        accessor: 'date' 
+        maxWidth: 400,
+        accessor: `date`, // String-based value accessors!
+        Cell: (props) =>
+          <div style={{display: "flex", justifyContent:"space-between", flexDirection:"column"}}>
+          <span>
+
+              {moment(props.original.date).format('LL')}
+          </span>
+          <span>
+
+              {moment(props.original.date).format('LT')}
+          </span>
+          <span>
+
+              {moment(props.original.date, "YYYYMMDD").fromNow()}
+          </span>
+          </div>
       },
     ]
     if (!events.length) {
