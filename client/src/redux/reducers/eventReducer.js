@@ -18,6 +18,3 @@ export default (state = [], action) => {
       return state;
   }
 }
-
-
-// /orgs/{orgId}/events"

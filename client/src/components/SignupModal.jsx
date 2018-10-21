@@ -39,11 +39,11 @@ class SignupModal extends Component {
   }
 
   handleName = e => {
-    this.setState({nameVal: e.target.value})
+    this.setState({ nameVal: e.target.value })
   };
 
   handlePhoneNumber = e => {
-    this.setState({phoneNumValue: e.target.value})
+    this.setState({ phoneNumValue: e.target.value })
   };
 
   isPhoneNum = (inputPhoneNum) => {
@@ -63,14 +63,14 @@ class SignupModal extends Component {
   }
 
   handleNamePlaceholder = () => {
-    if(!localStorage.getItem('name')){
+    if (!localStorage.getItem('name')) {
       return "Enter full name";
     }
     return localStorage.getItem('name');
   }
 
   handlePhonePlaceholder = () => {
-    if(!localStorage.getItem('phone')){
+    if (!localStorage.getItem('phone')) {
       return "Enter phone number (e.g. 555-555-5555)";
     }
     return localStorage.getItem('phone');
@@ -78,7 +78,7 @@ class SignupModal extends Component {
 
   render() {
     const onSubmit = () => {
-      let values = {phone: this.state.phoneNumValue, name: this.state.nameVal}
+      let values = { phone: this.state.phoneNumValue, name: this.state.nameVal }
       if (!this.isPhoneNum(values.phone)) {
         alert('Invalid phone number')
 
@@ -106,31 +106,31 @@ class SignupModal extends Component {
           <Modal isOpen={this.state.modal} toggle={this.toggle} >
             <ModalHeader toggle={this.toggle}>Volunteer Form</ModalHeader>
             <ModalBody >
-          
-                      <Label>Name</Label>
-                      <div>
-                        <input
-                          name="name"
-                          value={this.state.nameVal}
-                          onChange={this.handleName}
-                          className="form-control"
-                        />
-                      </div>
 
-                      <Label style={{paddingTop: "10px"}}>Phone Number</Label>
-                      <div>
-                        <input
-                          name="phone"
-                          value={this.state.phoneNumValue}
-                          onChange={this.handlePhoneNumber}
-                          className="form-control"
-                        />
-                      </div>
+              <Label>Name</Label>
+              <div>
+                <input
+                  name="name"
+                  value={this.state.nameVal}
+                  onChange={this.handleName}
+                  className="form-control"
+                />
+              </div>
 
-                      <Button
-                        style={{marginTop: "10px"}}
-                        onClick={onSubmit}
-                        variant="success">Sign up</Button>
+              <Label style={{ paddingTop: "10px" }}>Phone Number</Label>
+              <div>
+                <input
+                  name="phone"
+                  value={this.state.phoneNumValue}
+                  onChange={this.handlePhoneNumber}
+                  className="form-control"
+                />
+              </div>
+
+              <Button
+                style={{ marginTop: "10px" }}
+                onClick={onSubmit}
+                variant="success">Sign up</Button>
 
             </ModalBody>
           </Modal>

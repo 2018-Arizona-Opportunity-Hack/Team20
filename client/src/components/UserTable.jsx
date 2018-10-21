@@ -62,7 +62,7 @@ class UserTable extends Component {
 
                             <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                                 <h2 style={{ color: "white" }}>Status</h2>
-                                <h1 style={{ color: "white", fontWeight: "600", fontSize: "50px" }}>{adminEvent.numberGoing / adminEvent.event.desiredAttendees * 100}</h1>
+                                <h1 style={{ color: "white", fontWeight: "600", fontSize: "50px" }}>{(adminEvent.numberGoing / adminEvent.event.desiredAttendees * 100).toFixed(2)}%</h1>
                                 <PieChart
                                     style={{ backgroundColor: "white", borderRadius: "100%", width: "70%", margin: "0", padding: "0" }}
                                     data={[{ value: 1, key: 1, color: '#E38627' }]}
