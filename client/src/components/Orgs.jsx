@@ -65,8 +65,8 @@ class Orgs extends Component {
       {
         style: { display: 'flex', alignItems: 'center' },
         Header: <h3>Date</h3>,
-        maxWidth: 400,
-        accessor: `date`, // String-based value accessors!
+        maxWidth: 300,
+        accessor: `date`, 
         Cell: (props) =>
           <div style={{display: "flex", justifyContent:"space-between", flexDirection:"column"}}>
           <span>

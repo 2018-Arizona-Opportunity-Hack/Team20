@@ -17,7 +17,7 @@ export const fetchEvents = () => dispatch => {
   })
 }
 
-export const signupEvent = (name, phoneNumber, eventId, history) => dispatch =>{
+export const signupEvent = (name, phoneNumber, eventId) => dispatch =>{
   let postBody = {
     eventId: eventId,
     organizationId: 1,
@@ -27,7 +27,4 @@ export const signupEvent = (name, phoneNumber, eventId, history) => dispatch =>{
     }
   }
   axios.post('/register', postBody)
-      .then(()=>{
-        history.push('/orgs/1/events')
-      })
 }
