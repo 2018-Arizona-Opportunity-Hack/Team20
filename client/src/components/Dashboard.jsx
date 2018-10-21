@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { Link } from 'react-router-dom';
+
 import { Progress } from 'reactstrap';
 import ReactTable from 'react-table';
 import "react-table/react-table.css";
 import moment from 'moment';
 
 import SignupModal from './SignupModal';
+import AdminView from './AdminView';
 
 class Dashboard extends Component {
-  
 
   render() {
     const { events } = this.props;
@@ -33,6 +35,7 @@ class Dashboard extends Component {
             &#x25cf;&nbsp;&nbsp;
                <span style={{ color: 'black' }}>{volunteers_required} volunteers needed</span>
             </span>
+            {/* <Link to={`/admin`}></Link> */}
             <SignupModal />
           </div>
         ) 
