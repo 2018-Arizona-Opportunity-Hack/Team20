@@ -8,10 +8,7 @@ import com.team20.team20.repository.OrganizationRepository;
 import com.team20.team20.repository.UserRepository;
 import com.team20.team20.services.DTO.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserController {

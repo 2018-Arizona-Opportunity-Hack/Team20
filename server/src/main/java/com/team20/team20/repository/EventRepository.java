@@ -15,5 +15,4 @@ public interface EventRepository extends CrudRepository<Event, Long> {
 
     @Query(value = "SELECT * FROM event WHERE date between ?1 and ?2", nativeQuery = true)
     List<Event> findUpcomingEvents(Date date1, Date date2);
-
 }

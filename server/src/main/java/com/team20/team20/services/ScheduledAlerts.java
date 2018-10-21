@@ -1,6 +1,5 @@
 package com.team20.team20.services;
 
-import com.team20.team20.SmsResponseController;
 import com.team20.team20.domain.Communication;
 import com.team20.team20.domain.Event;
 import com.team20.team20.domain.EventUser;
@@ -13,10 +12,8 @@ import com.team20.team20.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import sun.java2d.pipe.SpanShapeRenderer;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -104,6 +101,9 @@ public class ScheduledAlerts {
             List<User> usersGoing = eventService.getUsersWhoSayTheyreGoing(event);
             if(usersGoing.size() < event.getDesiredAttendees()) {
                 Iterable<User> users = userRepository.findAll();
+
+
+
                 SmsSender sender = new SmsSender();
                 for (User user : users) {
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");
@@ -116,24 +116,24 @@ public class ScheduledAlerts {
                     sender.send(user.getPhone(),
                             "Hello! A volunteer event on " + date +
                                     " at " + event.getOrganization().getName() +
-                                    " is still in need of additional volunteers! If you haven't already signed up, please consider helping by visiting: localhost:3000/#/dashboard");
+                                    " is still in need of additional volunteers! If you haven't already signed up, please consider helping by visiting: https://op-hack-2018-team20.herokuapp.com/#/orgs/1/events");
                 }
             }
         }
     }
 
-    @Scheduled(fixedRate = 999999999)
+    @Scheduled(cron = "0 0 9 * * *")
     public void SevenDayConfirmation() throws Exception {
         sendConfirmationText(7);
     }
 
 
-    @Scheduled(fixedRate = 999999999)
+    @Scheduled(cron = "0 0 9 * * *")
     public void ThreeDayConfirmation() throws Exception {
         sendConfirmationText(3);
     }
 
-    @Scheduled(fixedRate = 99999999)
+    @Scheduled(cron = "0 0 9 * * *")
     public void TwoDaySOS() throws Exception {
         sendSOS();
     }
