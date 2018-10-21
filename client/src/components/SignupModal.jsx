@@ -92,58 +92,57 @@ class SignupModal extends Component {
     // const isPhoneNum = inputPhoneNum => ((inputPhoneNum.match(phoneRegEx)) ? null : "Required")
     const required = value => (value ? null : "Required");
     const { events } = this.props;
-    console.log(this.props)
-    if (events.length) {
-      return (
-        <div>
-          <Button style={{ backgroundColor: "green" }} onClick={this.toggle}>Volunteer!</Button>
-          <Modal isOpen={this.state.modal} toggle={this.toggle} >
-            <ModalHeader toggle={this.toggle}>Volunteer Form</ModalHeader>
-            <ModalBody >
-              <Form
-                onSubmit={onSubmit}
-                render={({ handleSubmit, form, submitting, pristine, values }) => (
-                  <form onSubmit={handleSubmit}>
-                    <FormGroup>
-                      <Label>Name</Label>
-                      <Field
-                        name="name"
-                        type="text"
-                        component={AdaptedInput}
-                        placeholder="Enter full name"
-                        control
-                      />
-                      <Error name="name" />
-                    </FormGroup>
-                    <FormGroup>
-                      <Label>Phone Number</Label>
-                      <Field
-                        name="phone"
-                        component={AdaptedInput}
-                        placeholder="Enter phone number (e.g. 555-555-5555)"
-                        control
-                      />
-                      <Error name="phone" />
-                    </FormGroup>
-
-                    <Box justifyContent="">
-                      <Button
-                        type="submit"
-                        disabled={submitting || pristine}
-                        variant="primary"
-                      >
-                        Submit
-                     </Button>
-                    </Box>
-                  </form>
-                )}
-              />
-            </ModalBody>
-          </Modal>
-        </div>
-      );
-    } else {
+    if (!events.length) {
       return <div>Loading...</div>
+    } else {
+          return (
+            <div>
+              <Button style={{ backgroundColor: "green" }} onClick={this.toggle}>Volunteer!</Button>
+              <Modal isOpen={this.state.modal} toggle={this.toggle} >
+                <ModalHeader toggle={this.toggle}>Volunteer Form</ModalHeader>
+                <ModalBody >
+                  <Form
+                    onSubmit={onSubmit}
+                    render={({ handleSubmit, form, submitting, pristine, values }) => (
+                      <form onSubmit={handleSubmit}>
+                        <FormGroup>
+                          <Label>Name</Label>
+                          <Field
+                            name="name"
+                            type="text"
+                            component={AdaptedInput}
+                            placeholder="Enter full name"
+                            control
+                          />
+                          <Error name="name" />
+                        </FormGroup>
+                        <FormGroup>
+                          <Label>Phone Number</Label>
+                          <Field
+                            name="phone"
+                            component={AdaptedInput}
+                            placeholder="Enter phone number (e.g. 555-555-5555)"
+                            control
+                          />
+                          <Error name="phone" />
+                        </FormGroup>
+    
+                        <Box justifyContent="">
+                          <Button
+                            type="submit"
+                            disabled={submitting || pristine}
+                            variant="primary"
+                          >
+                            Submit
+                         </Button>
+                        </Box>
+                      </form>
+                    )}
+                  />
+                </ModalBody>
+              </Modal>
+            </div>
+          );
     }
   }
 }
@@ -157,4 +156,6 @@ const mapDispatchToProps = {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SignupModal));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SignupModal));
+
+// export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SignupModal));

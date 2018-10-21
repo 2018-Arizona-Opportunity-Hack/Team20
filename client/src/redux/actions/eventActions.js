@@ -9,6 +9,7 @@ import moment from 'moment';
 export const fetchEvents = () => dispatch => {
   axios.get('/orgs/1/events')
   .then((response)=>{
+    
     dispatch({
       type: FETCH_EVENTS,
       payload: response.data
