@@ -54,19 +54,19 @@ class Orgs extends Component {
         style: { display: 'flex', alignItems: 'center' },
         Header: <h3>Name</h3>,
         maxWidth: 300,
-        accessor: 'title' 
+        accessor: 'title'
       },
       {
         style: { alignSelf: 'center' },
         Header: <h3>Status</h3>,
-        accessor: 'events', 
+        accessor: 'events',
         Cell: (props) => renderStatus(props.original.remaining, props.original.desiredAttendees, props.original.id)
       },
       {
         style: { display: 'flex', alignItems: 'center' },
         Header: <h3>Date</h3>,
         maxWidth: 300,
-        accessor: `date`, 
+        accessor: `date`,
         Cell: (props) =>
           <div style={{display: "flex", justifyContent:"space-between", flexDirection:"column"}}>
           <span>
@@ -118,6 +118,12 @@ class Orgs extends Component {
               width: "100%"
             }}>
               <ReactTable
+                defaultSorted={[
+                    {
+                      id: "date",
+                      desc: false,
+                    }
+                ]}
                 style={{ height: window.innerHeight }}
                 defaultPageSize={10}
                 data={events}
