@@ -10,5 +10,5 @@ import java.util.List;
 public class AdminEvent {
     private Event event;
     private Float numberGoing;
-    private List<User> users;
+    private List<UserStats> users;
 }
