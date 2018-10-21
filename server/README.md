@@ -10,6 +10,8 @@ spring.datasource.username=user
 spring.datasource.password=pw
 ```
 
+3. Pass option `-Dspring.profiles.active=local`
+
 # Heroku setup
 
 1. Create all environment variables from `resources/.env-example`
