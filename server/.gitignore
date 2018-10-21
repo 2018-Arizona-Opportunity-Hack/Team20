@@ -25,3 +25,4 @@
 /.nb-gradle/
 
 .env
+src/main/resources/static
