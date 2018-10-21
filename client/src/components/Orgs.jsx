@@ -89,14 +89,13 @@ class Orgs extends Component {
 
             <div style={{ width: "100%", height: "200px", textAlign: "center", marginTop: "5px", display: "flex", flexDirection: "column", alignItems: "center" }}>
               <span style={{ marginBottom: "50px" }}>
-                {/* <h2 style={{ color: "white" }}>   {adminEvent.event.title}</h2> */}
-                {/* <h5 style={{ color: "white" }}>   {adminEvent.event.date}</h5> */}
+                <h2 style={{ color: "white" }}> Paz de Cristo </h2>
+                <h5 style={{ color: "white" }}> 124 n. random st </h5>
+                <span>
+                  123-123-1312
+                </span>
               </span>
-
               <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                {/* <h2 style={{ color: "white" }}>Status</h2> */}
-                {/* <h1 style={{ color: "white", fontWeight: "600", fontSize: "50px" }}>{adminEvent.numberGoing / adminEvent.event.desiredAttendees * 100}</h1> */}
-
               </div>
             </div>
           </div>
@@ -128,4 +127,4 @@ const mapDispatchToProps = {
 }
 
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Orgs));
+export default connect(mapStateToProps, mapDispatchToProps)(Orgs);

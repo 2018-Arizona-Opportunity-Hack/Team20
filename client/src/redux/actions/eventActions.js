@@ -28,6 +28,6 @@ export const signupEvent = (name, phoneNumber, eventId, history) => dispatch =>{
   }
   axios.post('/register', postBody)
       .then(()=>{
-        history.push('/dashboard')
+        history.push('/orgs/1/events')
       })
 }

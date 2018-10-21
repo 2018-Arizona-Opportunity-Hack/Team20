@@ -17,7 +17,7 @@ import {
   Typography
 } from "smooth-ui";
 import "react-table/react-table.css";
-import {withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 class SignupModal extends Component {
   state = {
@@ -28,16 +28,20 @@ class SignupModal extends Component {
   toggle = () => {
     if (localStorage.getItem('name') && localStorage.getItem('phone')) {
       // remember to inclue event_ID
-        this.props.signupEvent(
-            localStorage.getItem('name'),
-            localStorage.getItem('phone'),
-            this.props.event_ID,
-            this.props.history);
-    } else {
-      this.setState({
-        modal: !this.state.modal
-      });
+      this.props.signupEvent(
+        localStorage.getItem('name'),
+        localStorage.getItem('phone'),
+        this.props.event_ID,
+        this.props.history);
     }
+
+    console.log(
+      'toggling'
+    )
+
+    this.setState({
+      modal: !this.state.modal
+    });
   }
 
   isPhoneNum = (inputPhoneNum) => {
@@ -70,6 +74,10 @@ class SignupModal extends Component {
         // console.log(values)
         this.props.signupEvent(values.name, values.phone, this.props.event_ID, this.props.history);
       }
+
+      this.setState({
+        modal: !this.state.modal
+      });
     };
 
     const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -95,54 +103,54 @@ class SignupModal extends Component {
     if (!events.length) {
       return <div>Loading...</div>
     } else {
-          return (
-            <div>
-              <Button style={{ backgroundColor: "green" }} onClick={this.toggle}>Volunteer!</Button>
-              <Modal isOpen={this.state.modal} toggle={this.toggle} >
-                <ModalHeader toggle={this.toggle}>Volunteer Form</ModalHeader>
-                <ModalBody >
-                  <Form
-                    onSubmit={onSubmit}
-                    render={({ handleSubmit, form, submitting, pristine, values }) => (
-                      <form onSubmit={handleSubmit}>
-                        <FormGroup>
-                          <Label>Name</Label>
-                          <Field
-                            name="name"
-                            type="text"
-                            component={AdaptedInput}
-                            placeholder="Enter full name"
-                            control
-                          />
-                          <Error name="name" />
-                        </FormGroup>
-                        <FormGroup>
-                          <Label>Phone Number</Label>
-                          <Field
-                            name="phone"
-                            component={AdaptedInput}
-                            placeholder="Enter phone number (e.g. 555-555-5555)"
-                            control
-                          />
-                          <Error name="phone" />
-                        </FormGroup>
-    
-                        <Box justifyContent="">
-                          <Button
-                            type="submit"
-                            disabled={submitting || pristine}
-                            variant="primary"
-                          >
-                            Submit
+      return (
+        <div>
+          <Button style={{ backgroundColor: "green" }} onClick={this.toggle}>Volunteer!</Button>
+          <Modal isOpen={this.state.modal} toggle={this.toggle} >
+            <ModalHeader toggle={this.toggle}>Volunteer Form</ModalHeader>
+            <ModalBody >
+              <Form
+                onSubmit={onSubmit}
+                render={({ handleSubmit, form, submitting, pristine, values }) => (
+                  <form onSubmit={handleSubmit}>
+                    <FormGroup>
+                      <Label>Name</Label>
+                      <Field
+                        name="name"
+                        type="text"
+                        component={AdaptedInput}
+                        placeholder="Enter full name"
+                        control
+                      />
+                      <Error name="name" />
+                    </FormGroup>
+                    <FormGroup>
+                      <Label>Phone Number</Label>
+                      <Field
+                        name="phone"
+                        component={AdaptedInput}
+                        placeholder="Enter phone number (e.g. 555-555-5555)"
+                        control
+                      />
+                      <Error name="phone" />
+                    </FormGroup>
+
+                    <Box justifyContent="">
+                      <Button
+                        type="submit"
+                        disabled={submitting || pristine}
+                        variant="primary"
+                      >
+                        Submit
                          </Button>
-                        </Box>
-                      </form>
-                    )}
-                  />
-                </ModalBody>
-              </Modal>
-            </div>
-          );
+                    </Box>
+                  </form>
+                )}
+              />
+            </ModalBody>
+          </Modal>
+        </div>
+      );
     }
   }
 }
@@ -152,7 +160,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-    signupEvent
+  signupEvent
 }
 
 
