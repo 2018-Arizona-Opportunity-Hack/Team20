@@ -33,6 +33,6 @@ public class Events {
         Event event = eventService.eventRepository.findById(eventId).orElse(null);
         if(event == null) return null;
 
-
+        return null;
     }
 }
