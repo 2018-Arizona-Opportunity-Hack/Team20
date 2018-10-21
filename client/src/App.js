@@ -16,7 +16,6 @@ class App extends Component {
   }
 
   render(){
-    console.log('rendering');
     return (
       <div className="App">
         <Switch>
@@ -36,4 +35,4 @@ const mapDispatchToProps = {
   fetchEvents
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(App));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
