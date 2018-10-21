@@ -13,7 +13,7 @@ INSERT INTO users (name, phone, organization_id) VALUES
 INSERT INTO event (id, date, desired_attendees, title, organization_id) VALUES
   (1, '2018-10-29T09:22:12', 20, 'Serving Dinner', 1),
   (2, '2018-10-25T09:22:12', 20, 'Other Event in 3 Days', 1),
-  (3, '2018-10-23T09:22:12', 30, 'Serving Dinner', 1),
+  (3, '2018-10-23T09:22:12', 20, 'Serving Dinner', 1),
 
   (4, '2018-10-11T09:22:12', 20, 'Serving Dinner', 1),
   (5, '2018-09-11T09:22:12', 20, 'Serving Dinner', 1),
